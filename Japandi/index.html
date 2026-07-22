@@ -1,0 +1,731 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Noka creates quieter, more intentional routines for modern life." />
+  <title>Noka — Make room for what matters</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap');
+
+    :root {
+      --paper: #f1eee6;
+      --paper2: #e5e0d4;
+      --ink: #252a25;
+      --muted: #747970;
+      --moss: #566b54;
+      --clay: #b8755d;
+      --line: rgba(37, 42, 37, .16)
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      overflow-x: hidden
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 52px));
+      margin: auto
+    }
+
+    header {
+      position: fixed;
+      z-index: 10;
+      top: 0;
+      width: 100%;
+      padding: 26px max(26px, calc((100% - 1120px)/2));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(180deg, rgba(241, 238, 230, .95), rgba(241, 238, 230, .76), transparent)
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      font-weight: 500
+    }
+
+    .mark {
+      width: 16px;
+      height: 16px;
+      background: var(--clay);
+      border-radius: 50% 50% 50% 9%;
+      transform: rotate(-45deg)
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      font-size: 12px;
+      color: var(--muted)
+    }
+
+    .nav-cta {
+      padding: 10px 15px;
+      border: 1px solid var(--ink);
+      transition: .3s
+    }
+
+    .nav-cta:hover {
+      background: var(--ink);
+      color: var(--paper)
+    }
+
+    .hero {
+      min-height: 850px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      padding: 150px 0 120px
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr .85fr;
+      gap: 100px;
+      align-items: center
+    }
+
+    .kicker,
+    .eyebrow {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .2em;
+      color: var(--moss)
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: 'Newsreader', serif;
+      font-weight: 400
+    }
+
+    h1 {
+      font-size: clamp(65px, 8.4vw, 111px);
+      line-height: .88;
+      letter-spacing: -.07em;
+      margin: 25px 0 30px;
+      max-width: 680px
+    }
+
+    h1 em,
+    h2 em {
+      font-style: italic;
+      color: var(--moss)
+    }
+
+    .lede {
+      font-size: 17px;
+      line-height: 1.7;
+      max-width: 430px;
+      color: var(--muted);
+      margin: 0
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 18px;
+      padding: 14px 19px;
+      border: 1px solid var(--ink);
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin-top: 34px;
+      transition: .3s
+    }
+
+    .button:hover {
+      background: var(--ink);
+      color: var(--paper)
+    }
+
+    .hero-art {
+      height: 470px;
+      position: relative
+    }
+
+    .arch {
+      height: 390px;
+      width: 270px;
+      position: absolute;
+      right: 38px;
+      top: 35px;
+      background: var(--paper2);
+      border-radius: 140px 140px 0 0
+    }
+
+    .arch:before {
+      content: '';
+      position: absolute;
+      inset: 22px 22px 0;
+      border: 1px solid var(--line);
+      border-bottom: 0;
+      border-radius: 120px 120px 0 0
+    }
+
+    .sun {
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background: var(--clay);
+      position: absolute;
+      right: -38px;
+      top: 0;
+      opacity: .93
+    }
+
+    .stem {
+      position: absolute;
+      width: 1px;
+      height: 310px;
+      background: var(--moss);
+      left: 58px;
+      bottom: 0;
+      transform: rotate(18deg)
+    }
+
+    .leaf {
+      position: absolute;
+      width: 72px;
+      height: 38px;
+      border: 1px solid var(--moss);
+      border-radius: 100% 0 100% 0;
+      left: 24px;
+      bottom: 138px;
+      transform: rotate(-24deg)
+    }
+
+    .leaf.two {
+      left: 51px;
+      bottom: 205px;
+      transform: rotate(28deg) scale(.7)
+    }
+
+    .pebble {
+      position: absolute;
+      width: 88px;
+      height: 64px;
+      background: var(--moss);
+      border-radius: 70% 30% 55% 45%;
+      bottom: 12px;
+      right: 0
+    }
+
+    .caption {
+      position: absolute;
+      bottom: 16px;
+      left: 0;
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      writing-mode: vertical-rl
+    }
+
+    section {
+      padding: 125px 0
+    }
+
+    .quiet {
+      background: var(--paper2)
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 110px;
+      align-items: start
+    }
+
+    .quiet h2,
+    .practice h2 {
+      font-size: clamp(48px, 6vw, 77px);
+      line-height: .95;
+      letter-spacing: -.07em;
+      margin: 17px 0
+    }
+
+    .copy {
+      max-width: 490px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.8
+    }
+
+    .copy strong {
+      color: var(--ink);
+      font-weight: 500
+    }
+
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--line);
+      margin-top: 78px;
+      border: 1px solid var(--line)
+    }
+
+    .principle {
+      background: var(--paper2);
+      min-height: 230px;
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between
+    }
+
+    .principle:nth-child(2) {
+      background: #ece7dc
+    }
+
+    .principle:nth-child(3) {
+      background: #d9e0d3
+    }
+
+    .num {
+      font-size: 12px;
+      color: var(--clay)
+    }
+
+    .principle h3 {
+      font-size: 25px;
+      margin: 0 0 10px
+    }
+
+    .principle p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6
+    }
+
+    .practice {
+      background: var(--paper);
+      position: relative
+    }
+
+    .practice .section-grid {
+      align-items: center
+    }
+
+    .practice h2 em {
+      color: var(--clay)
+    }
+
+    .window {
+      height: 340px;
+      background: var(--moss);
+      position: relative;
+      padding: 27px;
+      color: var(--paper);
+      overflow: hidden
+    }
+
+    .window:before {
+      content: '';
+      position: absolute;
+      inset: 27px;
+      border: 1px solid rgba(241, 238, 230, .42)
+    }
+
+    .window-inner {
+      position: absolute;
+      inset: 28px;
+      background: linear-gradient(150deg, transparent 52%, rgba(241, 238, 230, .08) 52%)
+    }
+
+    .window-copy {
+      position: relative;
+      z-index: 1;
+      max-width: 200px;
+      margin-top: 55px
+    }
+
+    .window-copy h3 {
+      font-size: 35px;
+      line-height: .95;
+      margin: 0 0 18px
+    }
+
+    .window-copy p {
+      font-size: 12px;
+      line-height: 1.55;
+      color: #d4dbc9
+    }
+
+    .circle-line {
+      position: absolute;
+      width: 210px;
+      height: 210px;
+      border: 1px solid rgba(241, 238, 230, .45);
+      border-radius: 50%;
+      right: -35px;
+      bottom: -48px
+    }
+
+    .circle-line:after {
+      content: '';
+      position: absolute;
+      inset: 25px;
+      border: 1px solid rgba(241, 238, 230, .45);
+      border-radius: 50%
+    }
+
+    .clay {
+      background: var(--clay);
+      padding: 130px 0
+    }
+
+    .clay .eyebrow {
+      color: #f6e9d8
+    }
+
+    .clay h2 {
+      font-size: clamp(48px, 6vw, 80px);
+      line-height: .95;
+      letter-spacing: -.07em;
+      margin: 17px 0;
+      color: var(--paper)
+    }
+
+    .clay h2 em {
+      color: var(--ink)
+    }
+
+    .clay .copy {
+      color: #f2d9cb
+    }
+
+    .clay-card {
+      margin-top: 75px;
+      padding: 48px;
+      background: var(--paper);
+      color: var(--ink);
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 40px;
+      position: relative
+    }
+
+    .clay-card:before {
+      content: '間';
+      font-size: 200px;
+      line-height: 1;
+      color: var(--paper2);
+      position: absolute;
+      right: 30px;
+      top: 4px;
+      font-family: serif
+    }
+
+    .clay-card>* {
+      position: relative;
+      z-index: 1
+    }
+
+    .clay-card h3 {
+      font-size: 42px;
+      line-height: .96;
+      max-width: 390px;
+      margin: 0 0 16px
+    }
+
+    .clay-card p {
+      max-width: 290px;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 13px;
+      margin: 0
+    }
+
+    .clay-card .button {
+      margin-top: 24px
+    }
+
+    .final {
+      padding: 160px 0 180px;
+      text-align: center;
+      background: var(--paper2)
+    }
+
+    .final h2 {
+      font-size: clamp(55px, 7vw, 92px);
+      line-height: .9;
+      letter-spacing: -.07em;
+      margin: 18px auto 25px;
+      max-width: 720px
+    }
+
+    .final h2 em {
+      color: var(--clay)
+    }
+
+    .final p {
+      max-width: 430px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0 auto
+    }
+
+    .final .button {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink)
+    }
+
+    .final .button:hover {
+      background: var(--moss);
+      border-color: var(--moss)
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      padding: 28px 0 45px;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .8s ease, transform .8s ease
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none
+    }
+
+    @media(max-width:760px) {
+      .wrap {
+        width: calc(100% - 36px)
+      }
+
+      header {
+        padding: 19px 18px
+      }
+
+      .nav-cta {
+        display: none
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 140px 0 90px
+      }
+
+      .hero-grid,
+      .section-grid {
+        grid-template-columns: 1fr;
+        gap: 55px
+      }
+
+      .hero-art {
+        height: 400px
+      }
+
+      .arch {
+        right: 15%;
+        height: 350px;
+        width: 245px
+      }
+
+      .sun {
+        right: 0
+      }
+
+      .principles {
+        grid-template-columns: 1fr;
+        margin-top: 52px
+      }
+
+      .principle {
+        min-height: 170px
+      }
+
+      .practice,
+      .quiet,
+      .clay {
+        padding: 92px 0
+      }
+
+      .clay-card {
+        padding: 35px 27px;
+        display: block
+      }
+
+      .clay-card h3 {
+        font-size: 37px
+      }
+
+      .clay-card .button {
+        margin-top: 27px
+      }
+
+      .clay-card:before {
+        font-size: 160px;
+        right: 12px
+      }
+
+      section.final {
+        padding: 115px 0 135px
+      }
+
+      footer {
+        display: block;
+        line-height: 2.2
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header><a class="brand" href="#top"><span class="mark"></span>Noka</a>
+    <nav><a href="#way">The Noka way</a><a href="#practice">Our practice</a><a class="nav-cta" href="#begin">Begin
+        gently&nbsp; ↗</a></nav>
+  </header>
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="reveal">
+          <div class="kicker">A quieter way to live</div>
+          <h1>Make room for what <em>matters.</em></h1>
+          <p class="lede">Noka helps you build small, lasting rituals that bring more presence to your everyday —
+            without asking for more from you.</p><a class="button" href="#way">Find your pace&nbsp; ↗</a>
+        </div>
+        <div class="hero-art reveal">
+          <div class="arch"></div>
+          <div class="sun"></div>
+          <div class="stem"></div>
+          <div class="leaf"></div>
+          <div class="leaf two"></div>
+          <div class="pebble"></div>
+          <div class="caption">A practice of less, done well</div>
+        </div>
+      </div>
+    </section>
+    <section class="quiet" id="way">
+      <div class="wrap">
+        <div class="section-grid reveal">
+          <div>
+            <div class="eyebrow">The Noka way</div>
+            <h2>Less, but <em>better.</em></h2>
+          </div>
+          <div class="copy">
+            <p><strong>Modern life rarely needs another thing.</strong> It needs a little more room around the things
+              already worth keeping.</p>
+            <p>Noka is a gentle system for shaping your days with intention — one small ritual, one honest pause, one
+              useful object at a time.</p>
+          </div>
+        </div>
+        <div class="principles">
+          <article class="principle reveal"><span class="num">01 / SPACE</span>
+            <div>
+              <h3>Clear the noise.</h3>
+              <p>Make space for the thoughts and people that deserve your full attention.</p>
+            </div>
+          </article>
+          <article class="principle reveal"><span class="num">02 / RHYTHM</span>
+            <div>
+              <h3>Move naturally.</h3>
+              <p>Build practices that support real life, not an ideal version of it.</p>
+            </div>
+          </article>
+          <article class="principle reveal"><span class="num">03 / CARE</span>
+            <div>
+              <h3>Keep what lasts.</h3>
+              <p>Choose well, use fully, and let beauty arrive through daily use.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section class="practice" id="practice">
+      <div class="wrap">
+        <div class="section-grid">
+          <div class="window reveal">
+            <div class="window-inner"></div>
+            <div class="window-copy">
+              <div class="eyebrow">A daily practice</div>
+              <h3>Let the day begin slowly.</h3>
+              <p>A quiet morning guide for noticing what is here before deciding what comes next.</p>
+            </div>
+            <div class="circle-line"></div>
+          </div>
+          <div class="reveal">
+            <div class="eyebrow">Designed for real mornings</div>
+            <h2>Small rituals. <em>Deep roots.</em></h2>
+            <div class="copy">
+              <p>Each Noka practice takes less than ten minutes. Not to optimize your day — to give it a center.</p>
+              <p>Choose a prompt, follow your attention, and leave with one clear thing to carry forward.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="clay">
+      <div class="wrap">
+        <div class="section-grid reveal">
+          <div>
+            <div class="eyebrow">The first step</div>
+            <h2>Start with a little <em>less.</em></h2>
+          </div>
+          <div class="copy">
+            <p>We believe a meaningful change should feel light enough to begin today. Noka meets you where you are and
+              makes the next step feel quietly obvious.</p>
+          </div>
+        </div>
+        <div class="clay-card reveal">
+          <div>
+            <h3>A calmer day is closer than you think.</h3>
+            <p>Receive one considered ritual each morning, made for the life you actually live.</p><a class="button"
+              href="#begin">Try Noka gently&nbsp; ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="final" id="begin">
+      <div class="wrap reveal">
+        <div class="eyebrow">A natural next step</div>
+        <h2>Come back to <em>yourself.</em></h2>
+        <p>Join the first group of people making a little more room for the things that matter.</p><a class="button"
+          href="mailto:hello@noka.example">Begin gently&nbsp; ↗</a>
+      </div>
+    </section>
+  </main>
+  <footer class="wrap"><span>© 2026 Noka</span><span>Less, but better.</span></footer>
+  <script>const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible') }), { threshold: .12 }); document.querySelectorAll('.reveal').forEach(el => observer.observe(el));</script>
+</body>
+
+</html>

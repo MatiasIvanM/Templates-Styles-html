@@ -1,0 +1,702 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Aurelia is a private cultural circle for people who collect remarkable evenings." />
+  <title>Aurelia — A life in good taste</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap');
+
+    :root {
+      --ink: #17130f;
+      --cream: #f4ecdc;
+      --gold: #c99b45;
+      --gold-light: #e4c987;
+      --wine: #5d172a;
+      --green: #163d35;
+      --line: rgba(201, 155, 69, .55)
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      margin: 0;
+      background: var(--ink);
+      color: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 48px));
+      margin: auto
+    }
+
+    header {
+      position: fixed;
+      z-index: 8;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 22px max(24px, calc((100% - 1120px)/2));
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(180deg, rgba(23, 19, 15, .96), rgba(23, 19, 15, .56), transparent)
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-family: 'Playfair Display', serif;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-size: 16px
+    }
+
+    .brand-mark {
+      width: 20px;
+      height: 20px;
+      border: 1px solid var(--gold);
+      transform: rotate(45deg);
+      position: relative
+    }
+
+    .brand-mark:after {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border: 1px solid var(--gold);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      color: #d8c9ac;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .14em
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 18px;
+      padding: 14px 19px;
+      border: 1px solid var(--gold);
+      color: var(--gold-light);
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      transition: .35s
+    }
+
+    .button:hover {
+      background: var(--gold);
+      color: var(--ink)
+    }
+
+    .hero {
+      min-height: 900px;
+      position: relative;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      overflow: hidden;
+      background: radial-gradient(ellipse at 50% 32%, #553420 0, #271d16 37%, var(--ink) 72%)
+    }
+
+    .hero:before,
+    .hero:after {
+      content: '';
+      position: absolute;
+      width: 650px;
+      height: 650px;
+      left: 50%;
+      top: 45%;
+      transform: translate(-50%, -50%) rotate(45deg);
+      border: 1px solid var(--line);
+      opacity: .65
+    }
+
+    .hero:after {
+      width: 520px;
+      height: 520px;
+      border-color: rgba(201, 155, 69, .3)
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      margin-top: 52px
+    }
+
+    .kicker {
+      font-size: 11px;
+      letter-spacing: .36em;
+      text-transform: uppercase;
+      color: var(--gold-light)
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 500
+    }
+
+    h1 {
+      font-size: clamp(66px, 10vw, 128px);
+      line-height: .87;
+      letter-spacing: -.065em;
+      margin: 25px auto 30px;
+      max-width: 780px
+    }
+
+    .hero-title em {
+      color: var(--gold-light);
+      font-style: italic
+    }
+
+    .hero-copy {
+      max-width: 500px;
+      margin: 0 auto 35px;
+      color: #cfbea2;
+      line-height: 1.7;
+      font-size: 16px
+    }
+
+    .hero-rule {
+      width: 100px;
+      margin: 28px auto;
+      border-top: 1px solid var(--gold)
+    }
+
+    .ornament {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: center;
+      color: var(--gold);
+      font-size: 16px
+    }
+
+    .ornament:before,
+    .ornament:after {
+      content: '';
+      width: 65px;
+      border-top: 1px solid var(--gold)
+    }
+
+    .band {
+      background: var(--cream);
+      color: var(--ink);
+      padding: 120px 0;
+      position: relative
+    }
+
+    .band:before {
+      content: '◆  ◇  ◆  ◇  ◆  ◇  ◆';
+      position: absolute;
+      top: 22px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      color: var(--gold);
+      font-size: 15px;
+      letter-spacing: 13px;
+      opacity: .7
+    }
+
+    .section-intro {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 100px;
+      align-items: start
+    }
+
+    .eyebrow {
+      color: var(--wine);
+      font-size: 11px;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      font-weight: 600
+    }
+
+    .band h2 {
+      font-size: clamp(46px, 6vw, 80px);
+      line-height: .95;
+      letter-spacing: -.06em;
+      margin: 18px 0 0
+    }
+
+    .band h2 em {
+      color: var(--wine)
+    }
+
+    .copy {
+      max-width: 490px;
+      color: #63584d;
+      line-height: 1.75;
+      font-size: 16px
+    }
+
+    .copy strong {
+      color: var(--ink)
+    }
+
+    .numbers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--gold);
+      margin-top: 85px;
+      border: 1px solid var(--gold)
+    }
+
+    .number {
+      background: var(--cream);
+      padding: 30px 25px;
+      min-height: 230px
+    }
+
+    .number span {
+      font-family: 'Playfair Display', serif;
+      font-size: 40px;
+      color: var(--gold)
+    }
+
+    .number h3 {
+      font-size: 22px;
+      margin: 35px 0 12px
+    }
+
+    .number p {
+      color: #74685b;
+      font-size: 13px;
+      line-height: 1.6;
+      margin: 0
+    }
+
+    .wine {
+      background: var(--wine);
+      padding: 130px 0;
+      color: var(--cream);
+      position: relative;
+      overflow: hidden
+    }
+
+    .wine:before {
+      content: '';
+      position: absolute;
+      inset: 35px;
+      border: 1px solid rgba(228, 201, 135, .26);
+      pointer-events: none
+    }
+
+    .wine .section-intro {
+      position: relative;
+      z-index: 1
+    }
+
+    .wine .eyebrow {
+      color: var(--gold-light)
+    }
+
+    .wine h2 {
+      font-size: clamp(46px, 6vw, 78px)
+    }
+
+    .wine h2 em {
+      color: var(--gold-light)
+    }
+
+    .wine .copy {
+      color: #dfcfc0
+    }
+
+    .manifesto {
+      margin-top: 70px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 30px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 30px
+    }
+
+    .manifesto p {
+      font-family: 'Playfair Display', serif;
+      font-size: 29px;
+      line-height: 1.2;
+      max-width: 640px;
+      margin: 0
+    }
+
+    .seal {
+      width: 105px;
+      height: 105px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: var(--gold-light);
+      font-size: 10px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      position: relative;
+      flex: none
+    }
+
+    .seal:before {
+      content: '';
+      position: absolute;
+      inset: 7px;
+      border: 1px solid var(--gold);
+      border-radius: 50%
+    }
+
+    .gold {
+      background: var(--green);
+      padding: 140px 0;
+      position: relative
+    }
+
+    .gold .section-intro {
+      align-items: center
+    }
+
+    .gold h2 {
+      color: var(--cream)
+    }
+
+    .gold h2 em {
+      color: var(--gold-light)
+    }
+
+    .gold .copy {
+      color: #c5d0bf
+    }
+
+    .invitation {
+      margin-top: 75px;
+      padding: 52px 60px;
+      background: linear-gradient(130deg, #d5b66e, #f0dba2 45%, #a97c31);
+      color: var(--ink);
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      position: relative;
+      clip-path: polygon(2% 0, 98% 0, 100% 8%, 100% 92%, 98% 100%, 2% 100%, 0 92%, 0 8%)
+    }
+
+    .invitation:before {
+      content: '';
+      position: absolute;
+      inset: 15px;
+      border: 1px solid rgba(23, 19, 15, .45)
+    }
+
+    .invitation>* {
+      position: relative;
+      z-index: 1
+    }
+
+    .invitation h3 {
+      font-size: 42px;
+      line-height: .95;
+      max-width: 380px;
+      margin: 0 0 14px
+    }
+
+    .invitation p {
+      max-width: 260px;
+      color: #554323;
+      font-size: 13px;
+      line-height: 1.55;
+      margin: 0
+    }
+
+    .invitation .button {
+      border-color: var(--ink);
+      color: var(--ink);
+      white-space: nowrap
+    }
+
+    .invitation .button:hover {
+      background: var(--ink);
+      color: var(--gold-light)
+    }
+
+    .final {
+      background: var(--cream);
+      color: var(--ink);
+      text-align: center;
+      padding: 155px 0 175px;
+      position: relative
+    }
+
+    .final:before {
+      content: '✦';
+      position: absolute;
+      top: 43px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--gold);
+      font-size: 25px
+    }
+
+    .final h2 {
+      font-size: clamp(51px, 7vw, 92px);
+      line-height: .92;
+      letter-spacing: -.07em;
+      max-width: 760px;
+      margin: 20px auto 25px
+    }
+
+    .final h2 em {
+      color: var(--wine)
+    }
+
+    .final p {
+      max-width: 440px;
+      margin: 0 auto 35px;
+      color: #74685b;
+      line-height: 1.65
+    }
+
+    .final .button {
+      background: var(--wine);
+      border-color: var(--wine);
+      color: var(--gold-light)
+    }
+
+    .final .button:hover {
+      background: var(--ink);
+      border-color: var(--ink)
+    }
+
+    footer {
+      padding: 24px 0 48px;
+      display: flex;
+      justify-content: space-between;
+      color: #a58e70;
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity .85s ease, transform .85s ease
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none
+    }
+
+    @media(max-width:760px) {
+      .wrap {
+        width: calc(100% - 36px)
+      }
+
+      header {
+        padding: 17px 18px
+      }
+
+      .nav a:not(.button) {
+        display: none
+      }
+
+      .hero {
+        min-height: 780px
+      }
+
+      .hero:before {
+        width: 470px;
+        height: 470px
+      }
+
+      .hero:after {
+        width: 380px;
+        height: 380px
+      }
+
+      .band,
+      .wine,
+      .gold {
+        padding: 95px 0
+      }
+
+      .section-intro {
+        grid-template-columns: 1fr;
+        gap: 35px
+      }
+
+      .numbers {
+        grid-template-columns: 1fr;
+        margin-top: 55px
+      }
+
+      .number {
+        min-height: 170px
+      }
+
+      .number h3 {
+        margin-top: 20px
+      }
+
+      .wine:before {
+        inset: 18px
+      }
+
+      .manifesto {
+        align-items: start;
+        flex-direction: column
+      }
+
+      .manifesto p {
+        font-size: 25px
+      }
+
+      .invitation {
+        padding: 44px 30px;
+        align-items: start;
+        flex-direction: column;
+        gap: 35px
+      }
+
+      .invitation h3 {
+        font-size: 36px
+      }
+
+      .final {
+        padding: 115px 0 130px
+      }
+
+      footer {
+        display: block;
+        line-height: 2.2
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header><a class="brand" href="#top"><span class="brand-mark"></span>Aurelia</a>
+    <nav><a href="#circle">The circle</a><a href="#story">Our story</a><a class="button" href="#invite">Request an
+        invitation</a></nav>
+  </header>
+  <main id="top">
+    <section class="hero">
+      <div class="hero-inner reveal">
+        <div class="kicker">A private cultural circle</div>
+        <div class="hero-rule"></div>
+        <div class="ornament">A</div>
+        <h1 class="hero-title">A life in <em>good</em> taste.</h1>
+        <p class="hero-copy">Aurelia brings together the rarest ingredient of a remarkable life: time spent in
+          exceptional company.</p><a class="button" href="#circle">Enter Aurelia&nbsp; ↗</a>
+      </div>
+    </section>
+    <section class="band" id="circle">
+      <div class="wrap">
+        <div class="section-intro reveal">
+          <div>
+            <div class="eyebrow">The Aurelia circle</div>
+            <h2>For those who collect <em>evenings.</em></h2>
+          </div>
+          <div class="copy">
+            <p><strong>Aurelia is a private calendar of beautiful interruptions.</strong> Each month, we create a small
+              number of experiences for people who believe the best stories begin when the room goes quiet.</p>
+            <p>One table. A considered guest list. A setting worth dressing for.</p>
+          </div>
+        </div>
+        <div class="numbers">
+          <article class="number reveal"><span>01</span>
+            <h3>Gather</h3>
+            <p>Intimate dinners and salons in rooms with a history.</p>
+          </article>
+          <article class="number reveal"><span>02</span>
+            <h3>Discover</h3>
+            <p>New voices, old craft, and ideas that stay with you.</p>
+          </article>
+          <article class="number reveal"><span>03</span>
+            <h3>Remember</h3>
+            <p>The kind of night that becomes part of your personal mythology.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section class="wine" id="story">
+      <div class="wrap">
+        <div class="section-intro reveal">
+          <div>
+            <div class="eyebrow">A considered way in</div>
+            <h2>Not a network.<br>A <em>constellation.</em></h2>
+          </div>
+          <div class="copy">
+            <p>We keep Aurelia deliberately small. Every member is invited because they add a particular light to the
+              room — a point of view, a curiosity, a generous appetite for life.</p>
+            <p>There are no badges, feeds, or handshakes to collect. Only an ongoing exchange of good energy.</p>
+          </div>
+        </div>
+        <div class="manifesto reveal">
+          <p>“The measure of an evening is not what happened. It is what remains when it is over.”</p>
+          <div class="seal">Est.<br>After<br>hours</div>
+        </div>
+      </div>
+    </section>
+    <section class="gold" id="invite">
+      <div class="wrap">
+        <div class="section-intro reveal">
+          <div>
+            <div class="eyebrow">The first invitation</div>
+            <h2>Leave room for the <em>unexpected.</em></h2>
+          </div>
+          <div class="copy">
+            <p>Our next season is opening quietly. Tell us a little about yourself and the kinds of evenings you would
+              like to find.</p>
+            <p>We will be in touch when there is a table that feels like yours.</p>
+          </div>
+        </div>
+        <div class="invitation reveal">
+          <div>
+            <h3>Your seat is waiting.</h3>
+            <p>Aurelia is currently welcoming its next circle of members.</p>
+          </div><a class="button" href="mailto:hello@aurelia.example">Begin the conversation&nbsp; ↗</a>
+        </div>
+      </div>
+    </section>
+    <section class="final">
+      <div class="wrap reveal">
+        <div class="eyebrow">An invitation to begin</div>
+        <h2>Make an evening of <em>it.</em></h2>
+        <p>For curious minds, generous hosts, and people who know that the extraordinary is often beautifully simple.
+        </p><a class="button" href="mailto:hello@aurelia.example">Request an invitation&nbsp; ↗</a>
+      </div>
+    </section>
+  </main>
+  <footer class="wrap"><span>© 2026 Aurelia</span><span>For evenings that matter.</span></footer>
+  <script>const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible') }), { threshold: .12 }); document.querySelectorAll('.reveal').forEach(el => observer.observe(el));</script>
+</body>
+
+</html>

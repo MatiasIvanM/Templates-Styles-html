@@ -1,0 +1,774 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Vectora makes uncertain futures easier to navigate." />
+  <title>Vectora — Find the clear line</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+    :root {
+      --black: #07090c;
+      --panel: #10151b;
+      --line: #26313b;
+      --text: #edf1f4;
+      --muted: #83909c;
+      --lime: #d8ff59;
+      --cyan: #5ee7ff;
+      --coral: #ff735c
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      margin: 0;
+      background: var(--black);
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      overflow-x: hidden
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none
+    }
+
+    .wrap {
+      width: min(1160px, calc(100% - 50px));
+      margin: auto
+    }
+
+    .mono,
+    .eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase
+    }
+
+    header {
+      position: fixed;
+      z-index: 10;
+      top: 0;
+      width: 100%;
+      padding: 18px max(25px, calc((100% - 1160px)/2));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(180deg, rgba(7, 9, 12, .96), rgba(7, 9, 12, .62), transparent);
+      backdrop-filter: blur(4px)
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      letter-spacing: -.06em
+    }
+
+    .brand-mark {
+      width: 18px;
+      height: 18px;
+      background: var(--lime);
+      clip-path: polygon(0 0, 100% 0, 100% 35%, 35% 100%, 0 100%);
+      box-shadow: 0 0 16px rgba(216, 255, 89, .5)
+    }
+
+    nav {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 12px
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      padding: 13px 18px;
+      border: 1px solid var(--lime);
+      color: var(--lime);
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: .3s
+    }
+
+    .button:hover {
+      background: var(--lime);
+      color: var(--black);
+      box-shadow: 0 0 24px rgba(216, 255, 89, .28)
+    }
+
+    .hero {
+      min-height: 910px;
+      padding: 155px 0 110px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(circle at 77% 28%, rgba(94, 231, 255, .13), transparent 25%), var(--black)
+    }
+
+    .hero:before {
+      content: '';
+      position: absolute;
+      width: 150vw;
+      height: 1px;
+      background: var(--line);
+      transform: rotate(-19deg);
+      top: 44%;
+      left: -20%;
+      box-shadow: 0 -19px 0 rgba(38, 49, 59, .25), 0 19px 0 rgba(38, 49, 59, .25)
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr .85fr;
+      gap: 80px;
+      align-items: center;
+      position: relative;
+      z-index: 1
+    }
+
+    .kicker {
+      color: var(--lime)
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 600
+    }
+
+    h1 {
+      font-size: clamp(68px, 10vw, 140px);
+      line-height: .79;
+      letter-spacing: -.11em;
+      margin: 25px 0 33px;
+      max-width: 730px
+    }
+
+    h1 span {
+      color: var(--lime)
+    }
+
+    .lede {
+      max-width: 430px;
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--muted);
+      margin: 0
+    }
+
+    .hero-art {
+      height: 480px;
+      position: relative
+    }
+
+    .slash {
+      position: absolute;
+      width: 430px;
+      height: 250px;
+      right: -20px;
+      top: 60px;
+      background: linear-gradient(135deg, var(--cyan), #166279 65%, transparent);
+      clip-path: polygon(19% 0, 100% 0, 81% 100%, 0 100%);
+      opacity: .9;
+      transform: rotate(-11deg)
+    }
+
+    .slash:after {
+      content: 'VECTOR / 01';
+      position: absolute;
+      right: 35px;
+      bottom: 34px;
+      font: 11px 'DM Mono';
+      color: var(--black);
+      letter-spacing: .1em
+    }
+
+    .dark-card {
+      position: absolute;
+      width: 225px;
+      min-height: 220px;
+      left: 10px;
+      bottom: 28px;
+      padding: 22px;
+      background: rgba(16, 21, 27, .95);
+      border: 1px solid var(--line);
+      transform: rotate(8deg);
+      box-shadow: 20px 20px 0 rgba(216, 255, 89, .9)
+    }
+
+    .dark-card .num {
+      font: 11px 'DM Mono';
+      color: var(--coral)
+    }
+
+    .dark-card h3 {
+      font-size: 27px;
+      letter-spacing: -.08em;
+      line-height: .92;
+      margin: 66px 0 14px
+    }
+
+    .dark-card p {
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--muted);
+      margin: 0
+    }
+
+    .cross {
+      position: absolute;
+      right: 18px;
+      top: 20px;
+      color: var(--coral);
+      font-size: 24px
+    }
+
+    section {
+      padding: 125px 0;
+      border-bottom: 1px solid var(--line);
+      position: relative
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 110px;
+      align-items: start
+    }
+
+    .eyebrow {
+      color: var(--cyan)
+    }
+
+    h2 {
+      font-size: clamp(48px, 6vw, 81px);
+      line-height: .85;
+      letter-spacing: -.11em;
+      margin: 17px 0;
+      max-width: 600px
+    }
+
+    h2 em {
+      color: var(--lime);
+      font-style: normal
+    }
+
+    .copy {
+      max-width: 490px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.75
+    }
+
+    .copy strong {
+      color: var(--text)
+    }
+
+    .fractures {
+      margin-top: 80px;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: 90px;
+      gap: 12px
+    }
+
+    .fracture {
+      padding: 21px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      position: relative;
+      overflow: hidden;
+      transition: .35s
+    }
+
+    .fracture:hover {
+      transform: rotate(-2deg) translateY(-5px);
+      border-color: var(--lime)
+    }
+
+    .fracture h3 {
+      font-size: 23px;
+      line-height: 1;
+      letter-spacing: -.06em;
+      margin: 35px 0 0
+    }
+
+    .fracture p {
+      font-size: 12px;
+      line-height: 1.45;
+      color: var(--muted);
+      margin: 11px 0 0
+    }
+
+    .fracture .label {
+      font: 11px 'DM Mono';
+      color: var(--coral)
+    }
+
+    .fracture.a {
+      grid-column: span 7;
+      grid-row: span 3;
+      background: var(--lime);
+      color: var(--black);
+      clip-path: polygon(0 0, 93% 0, 100% 22%, 100% 100%, 7% 100%, 0 77%)
+    }
+
+    .fracture.a .label,
+    .fracture.a p {
+      color: #3c4726
+    }
+
+    .fracture.b {
+      grid-column: span 5;
+      grid-row: span 2;
+      transform: translateY(24px)
+    }
+
+    .fracture.c {
+      grid-column: span 5;
+      grid-row: span 1;
+      background: var(--coral);
+      color: var(--black)
+    }
+
+    .fracture.c .label {
+      color: #5e241c
+    }
+
+    .fracture.d {
+      grid-column: span 5;
+      grid-row: span 2;
+      transform: translateY(-10px)
+    }
+
+    .fracture.d:after {
+      content: '';
+      position: absolute;
+      width: 170px;
+      height: 170px;
+      border: 1px solid var(--cyan);
+      border-radius: 50%;
+      right: -80px;
+      bottom: -70px
+    }
+
+    .fracture.e {
+      grid-column: span 7;
+      grid-row: span 1;
+      border-left: 4px solid var(--cyan)
+    }
+
+    .tension {
+      background: #0d1116;
+      overflow: hidden
+    }
+
+    .tension:before {
+      content: '';
+      position: absolute;
+      width: 140%;
+      height: 1px;
+      left: -15%;
+      top: 48%;
+      background: var(--line);
+      transform: rotate(12deg);
+      box-shadow: 0 24px 0 rgba(38, 49, 59, .3)
+    }
+
+    .tension .split {
+      position: relative;
+      z-index: 1;
+      align-items: center
+    }
+
+    .tension h2 em {
+      color: var(--coral)
+    }
+
+    .tension .copy {
+      color: #87949f
+    }
+
+    .signal {
+      height: 345px;
+      border: 1px solid var(--line);
+      position: relative;
+      padding: 28px;
+      background: linear-gradient(135deg, rgba(94, 231, 255, .12), rgba(16, 21, 27, .3));
+      overflow: hidden
+    }
+
+    .signal:before {
+      content: 'CLEAR';
+      position: absolute;
+      font-size: 150px;
+      letter-spacing: -.14em;
+      line-height: .7;
+      left: -11px;
+      bottom: 8px;
+      color: rgba(94, 231, 255, .14);
+      font-weight: 700;
+      transform: rotate(-13deg)
+    }
+
+    .signal .eyebrow {
+      color: var(--lime)
+    }
+
+    .signal-line {
+      position: absolute;
+      height: 1px;
+      background: var(--lime);
+      width: 78%;
+      top: 47%;
+      left: 7%;
+      transform: rotate(-17deg);
+      box-shadow: 0 0 12px var(--lime)
+    }
+
+    .signal-dot {
+      position: absolute;
+      width: 11px;
+      height: 11px;
+      background: var(--coral);
+      border-radius: 50%;
+      left: 65%;
+      top: 32%;
+      box-shadow: 0 0 20px var(--coral)
+    }
+
+    .signal p {
+      position: absolute;
+      bottom: 27px;
+      right: 24px;
+      max-width: 150px;
+      font-size: 12px;
+      line-height: 1.45;
+      color: var(--muted)
+    }
+
+    .align {
+      padding: 140px 0;
+      background: var(--lime);
+      color: var(--black)
+    }
+
+    .align .eyebrow {
+      color: #4b5b19
+    }
+
+    .align h2 em {
+      color: var(--black);
+      text-decoration: line-through;
+      text-decoration-color: var(--coral);
+      text-decoration-thickness: 4px
+    }
+
+    .align .copy {
+      color: #3d481f
+    }
+
+    .resolution {
+      margin-top: 76px;
+      padding: 45px;
+      background: var(--black);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 40px;
+      clip-path: polygon(0 0, 98% 0, 100% 20%, 100% 100%, 2% 100%, 0 75%)
+    }
+
+    .resolution h3 {
+      font-size: 42px;
+      line-height: .9;
+      letter-spacing: -.09em;
+      max-width: 400px;
+      margin: 0 0 15px
+    }
+
+    .resolution p {
+      max-width: 280px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.55;
+      margin: 0
+    }
+
+    .resolution .button {
+      margin-top: 25px
+    }
+
+    .final {
+      padding: 165px 0 185px;
+      text-align: center;
+      background: radial-gradient(circle at 50% 45%, #1a2c36, var(--black) 68%);
+      border-bottom: 0
+    }
+
+    .final h2 {
+      font-size: clamp(57px, 8vw, 105px);
+      max-width: 800px;
+      margin: 18px auto 28px
+    }
+
+    .final h2 em {
+      color: var(--cyan)
+    }
+
+    .final p {
+      max-width: 430px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0 auto
+    }
+
+    .final .button {
+      margin-top: 35px;
+      background: var(--lime);
+      color: var(--black);
+      border-color: var(--lime)
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      padding: 27px 0 45px;
+      color: #68747e;
+      font-size: 11px
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(23px);
+      transition: opacity .8s ease, transform .8s ease
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none
+    }
+
+    @media(max-width:760px) {
+      header {
+        padding: 16px 18px
+      }
+
+      .wrap {
+        width: calc(100% - 36px)
+      }
+
+      nav a:not(.button) {
+        display: none
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 135px 0 100px
+      }
+
+      .hero-grid,
+      .split {
+        grid-template-columns: 1fr;
+        gap: 55px
+      }
+
+      .hero-art {
+        height: 410px
+      }
+
+      .slash {
+        width: 340px;
+        right: -15px
+      }
+
+      .dark-card {
+        left: 0
+      }
+
+      .fractures {
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: 145px;
+        margin-top: 52px
+      }
+
+      .fracture.a,
+      .fracture.b,
+      .fracture.c,
+      .fracture.d,
+      .fracture.e {
+        grid-column: span 1;
+        grid-row: span 1;
+        transform: none;
+        clip-path: none
+      }
+
+      .fracture.a {
+        grid-column: span 2
+      }
+
+      .fracture.e {
+        grid-column: span 2
+      }
+
+      .fracture h3 {
+        margin-top: 40px
+      }
+
+      .tension,
+      .align {
+        padding: 95px 0
+      }
+
+      .resolution {
+        padding: 35px 25px;
+        display: block
+      }
+
+      .resolution h3 {
+        font-size: 36px
+      }
+
+      .resolution .button {
+        margin-top: 27px
+      }
+
+      .final {
+        padding: 120px 0 145px
+      }
+
+      .footer {
+        display: block;
+        line-height: 2.2
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header><a class="brand" href="#top"><span class="brand-mark"></span>vectora</a>
+    <nav><a href="#system">The system</a><a href="#signal">The signal</a><a class="button" href="#start">Find the
+        line&nbsp; ↗</a></nav>
+  </header>
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="reveal">
+          <div class="eyebrow kicker">A clearer way forward</div>
+          <h1>Find the <span>line</span> through the noise.</h1>
+          <p class="lede">Vectora turns uncertain futures into decisive next moves — a strategic signal for people
+            building what comes next.</p><a class="button" href="#system" style="margin-top:34px">Enter Vectora&nbsp;
+            ↗</a>
+        </div>
+        <div class="hero-art reveal">
+          <div class="slash"></div>
+          <div class="dark-card"><span class="num">VECTOR / 01</span><span class="cross">+</span>
+            <h3>Make the next move.</h3>
+            <p>See the pattern. Choose the direction. Keep moving.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="system">
+      <div class="wrap">
+        <div class="split reveal">
+          <div>
+            <div class="eyebrow">The Vectora system</div>
+            <h2>Order can come from <em>disruption.</em></h2>
+          </div>
+          <div class="copy">
+            <p><strong>When everything is moving, a straight line is not enough.</strong> Vectora helps ambitious teams
+              find the signal inside the noise and turn a difficult question into a clear decision.</p>
+            <p>We work in the spaces between certainty and action — where the next shape is waiting to be seen.</p>
+          </div>
+        </div>
+        <div class="fractures">
+          <article class="fracture a reveal"><span class="label">01 / LOCATE</span>
+            <h3>See what is really happening.</h3>
+            <p>Surface the pattern beneath the competing signals, opinions, and assumptions.</p>
+          </article>
+          <article class="fracture b reveal"><span class="label">02 / FRAME</span>
+            <h3>Give tension a shape.</h3>
+          </article>
+          <article class="fracture c reveal"><span class="label">03 / CUT THROUGH</span>
+            <h3>Remove the false choice.</h3>
+          </article>
+          <article class="fracture d reveal"><span class="label">04 / REORIENT</span>
+            <h3>Turn uncertainty into momentum.</h3>
+          </article>
+          <article class="fracture e reveal"><span class="label">05 / MOVE WITH INTENT</span></article>
+        </div>
+      </div>
+    </section>
+    <section class="tension" id="signal">
+      <div class="wrap">
+        <div class="split">
+          <div class="signal reveal">
+            <div class="eyebrow">Live read / 03:17</div>
+            <div class="signal-line"></div>
+            <div class="signal-dot"></div>
+            <p>One clear line can change the shape of the whole field.</p>
+          </div>
+          <div class="reveal">
+            <div class="eyebrow">The moment of clarity</div>
+            <h2>Let the noise become <em>useful.</em></h2>
+            <div class="copy">
+              <p>Vectora is a shared lens for complex moments. It gives your team the distance to see differently, then
+                the focus to commit.</p>
+              <p>The work is not about predicting the future. It is about making the next move with your eyes open.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="align">
+      <div class="wrap">
+        <div class="split reveal">
+          <div>
+            <div class="eyebrow">The point of alignment</div>
+            <h2>When the pieces finally <em>click.</em></h2>
+          </div>
+          <div class="copy">
+            <p>We bring strategy, language, and design into the same field of view. The result is a direction people can
+              understand — and act on.</p>
+          </div>
+        </div>
+        <div class="resolution reveal">
+          <div>
+            <h3>The line is yours to draw.</h3>
+            <p>Start a focused conversation about the challenge in front of you.</p><a class="button" href="#start">Draw
+              the line&nbsp; ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="final" id="start">
+      <div class="wrap reveal">
+        <div class="eyebrow">The next clear move</div>
+        <h2>Make uncertainty <em>useful.</em></h2>
+        <p>For teams with difficult questions, ambitious ideas, and no interest in standing still.</p><a class="button"
+          href="mailto:hello@vectora.example">Start a conversation&nbsp; ↗</a>
+      </div>
+    </section>
+  </main>
+  <footer class="wrap footer"><span>© 2026 Vectora</span><span>Find the clear line.</span></footer>
+  <script>const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible') }), { threshold: .12 }); document.querySelectorAll('.reveal').forEach(el => observer.observe(el));</script>
+</body>
+
+</html>

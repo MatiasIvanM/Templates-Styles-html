@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Tidewell turns scattered team rituals into a calmer, clearer rhythm of work." />
+  <title>Tidewell — Make space for better work</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap');
+
+    :root {
+      --ink: #173c36;
+      --muted: #5d7770;
+      --cream: #f7f4ed;
+      --mint: #dceee2;
+      --coral: #f27e63;
+      --yellow: #f8c86b;
+      --lavender: #dcd5fb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .wrap {
+      width: min(1160px, calc(100% - 48px));
+      margin: auto;
+    }
+
+    header {
+      position: fixed;
+      z-index: 10;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1160px, calc(100% - 48px));
+      padding: 12px 16px 12px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(247, 244, 237, .76);
+      border: 1px solid rgba(23, 60, 54, .09);
+      border-radius: 999px;
+      backdrop-filter: blur(16px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: 700;
+      letter-spacing: -.04em;
+    }
+
+    .brand-mark {
+      width: 22px;
+      height: 22px;
+      border-radius: 63% 37% 56% 44% / 44% 58% 42% 56%;
+      background: var(--coral);
+      transform: rotate(-26deg);
+    }
+
+    nav {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 18px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: white;
+      font-size: 13px;
+      font-weight: 600;
+      transition: transform .3s, background .3s;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+      background: #285d53;
+    }
+
+    .button.light {
+      background: white;
+      color: var(--ink);
+    }
+
+    .hero {
+      min-height: 890px;
+      padding: 175px 0 120px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr .9fr;
+      gap: 70px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .eyebrow {
+      color: #d25e48;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+    }
+
+    h1 {
+      max-width: 630px;
+      margin: 22px 0 26px;
+      font-size: clamp(58px, 8vw, 104px);
+      line-height: .91;
+      letter-spacing: -.08em;
+      font-weight: 500;
+    }
+
+    h1 em,
+    h2 em {
+      font-family: 'Playfair Display', serif;
+      font-weight: 500;
+    }
+
+    .lede {
+      max-width: 450px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .hero-actions {
+      margin-top: 34px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .note {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 22px;
+    }
+
+    .visual {
+      position: relative;
+      min-height: 500px;
+    }
+
+    .blob-main {
+      position: absolute;
+      width: 390px;
+      height: 480px;
+      right: 25px;
+      top: 0;
+      border-radius: 48% 52% 59% 41% / 43% 42% 58% 57%;
+      background: linear-gradient(145deg, #f8c86b 5%, #f39b76 50%, #d88bc5 100%);
+      transform: rotate(17deg);
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .blob-main:after {
+      content: '';
+      position: absolute;
+      width: 80%;
+      height: 70%;
+      top: 12%;
+      left: 10%;
+      border-radius: 60% 40% 50% 50%;
+      background: linear-gradient(160deg, rgba(255, 255, 255, .55), rgba(255, 255, 255, 0));
+      transform: rotate(-30deg);
+    }
+
+    .bubble {
+      position: absolute;
+      z-index: 2;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.3;
+    }
+
+    .bubble-a {
+      width: 130px;
+      height: 130px;
+      left: 2px;
+      top: 70px;
+      background: var(--mint);
+      animation: float 7s 1s ease-in-out infinite;
+    }
+
+    .bubble-b {
+      width: 112px;
+      height: 112px;
+      right: -12px;
+      bottom: 60px;
+      background: var(--lavender);
+      animation: float 7s 2s ease-in-out infinite;
+    }
+
+    .spark {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background: var(--coral);
+      border-radius: 65% 35% 60% 40%;
+      transform: rotate(25deg);
+    }
+
+    .spark.one {
+      top: 25px;
+      right: 5px;
+    }
+
+    .spark.two {
+      left: 70px;
+      bottom: 50px;
+      background: var(--ink);
+      width: 12px;
+      height: 12px;
+    }
+
+    .texture {
+      position: absolute;
+      inset: 0;
+      opacity: .32;
+      background-image: radial-gradient(rgba(23, 60, 54, .16) .7px, transparent .7px);
+      background-size: 18px 18px;
+      mask-image: linear-gradient(90deg, black, transparent 85%);
+    }
+
+    section {
+      padding: 135px 0;
+      position: relative;
+    }
+
+    .intro {
+      background: var(--mint);
+      border-radius: 70px 70px 0 0;
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 90px;
+      align-items: start;
+    }
+
+    h2 {
+      margin: 15px 0 0;
+      font-size: clamp(44px, 6vw, 76px);
+      line-height: .98;
+      letter-spacing: -.07em;
+      font-weight: 500;
+    }
+
+    .copy {
+      max-width: 490px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .copy strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 75px;
+    }
+
+    .pillar {
+      min-height: 230px;
+      padding: 24px;
+      border-radius: 32px;
+      background: rgba(255, 255, 255, .57);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform .4s;
+    }
+
+    .pillar:hover {
+      transform: translateY(-8px) rotate(1deg);
+    }
+
+    .pillar:nth-child(2) {
+      background: var(--yellow);
+    }
+
+    .pillar:nth-child(3) {
+      background: #f7c9c0;
+    }
+
+    .pillar b {
+      font-size: 14px;
+    }
+
+    .pillar p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .ritual {
+      background: #fbdfd0;
+      overflow: hidden;
+    }
+
+    .ritual:before {
+      content: '';
+      position: absolute;
+      width: 570px;
+      height: 570px;
+      border: 1px solid rgba(23, 60, 54, .18);
+      border-radius: 50%;
+      left: -180px;
+      top: 40px;
+      box-shadow: 0 0 0 36px rgba(23, 60, 54, .035), 0 0 0 72px rgba(23, 60, 54, .025);
+    }
+
+    .ritual-card {
+      margin-top: 68px;
+      padding: 34px;
+      min-height: 300px;
+      background: var(--cream);
+      border-radius: 42px;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ritual-card h3 {
+      max-width: 390px;
+      margin: 0;
+      font-size: 39px;
+      line-height: 1;
+      letter-spacing: -.06em;
+      font-weight: 500;
+    }
+
+    .ritual-card p {
+      max-width: 280px;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    .line-art {
+      width: 210px;
+      height: 210px;
+      position: absolute;
+      right: 16%;
+      top: 34px;
+      border: 1px solid var(--coral);
+      border-radius: 59% 41% 58% 42%;
+      transform: rotate(35deg);
+    }
+
+    .line-art:before,
+    .line-art:after {
+      content: '';
+      position: absolute;
+      inset: 28px;
+      border: 1px solid var(--coral);
+      border-radius: 42% 58% 38% 62%;
+    }
+
+    .line-art:after {
+      inset: 56px;
+    }
+
+    .final {
+      padding: 170px 0 190px;
+      text-align: center;
+      background: var(--lavender);
+      border-radius: 0 0 90px 90px;
+      overflow: hidden;
+    }
+
+    .final h2 {
+      max-width: 760px;
+      margin: 18px auto 28px;
+    }
+
+    .final p {
+      max-width: 440px;
+      margin: 0 auto 34px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    footer {
+      padding: 28px 0 50px;
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(17deg)
+      }
+
+      50% {
+        transform: translateY(-16px) rotate(20deg)
+      }
+    }
+
+    @media(max-width:760px) {
+      header {
+        top: 10px;
+        width: calc(100% - 24px)
+      }
+
+      nav a:not(.button) {
+        display: none
+      }
+
+      .wrap {
+        width: calc(100% - 36px)
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 145px 0 90px
+      }
+
+      .hero-grid,
+      .section-grid {
+        grid-template-columns: 1fr;
+        gap: 50px
+      }
+
+      .visual {
+        min-height: 430px
+      }
+
+      .blob-main {
+        right: 4%;
+        width: 300px;
+        height: 380px
+      }
+
+      .bubble-a {
+        left: 0
+      }
+
+      .bubble-b {
+        right: 0
+      }
+
+      .intro,
+      .final {
+        border-radius: 42px 42px 0 0
+      }
+
+      .section-grid {
+        gap: 20px
+      }
+
+      .pillars {
+        grid-template-columns: 1fr;
+        margin-top: 48px
+      }
+
+      .pillar {
+        min-height: 175px
+      }
+
+      .ritual-card {
+        align-items: start;
+        flex-direction: column;
+        gap: 180px
+      }
+
+      .line-art {
+        right: 10%;
+        top: 28px
+      }
+
+      .final {
+        border-radius: 0 0 42px 42px
+      }
+
+      footer {
+        display: block;
+        line-height: 2
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header><a class="brand" href="#top"><span class="brand-mark"></span>tidewell</a>
+    <nav><a href="#why">Why Tidewell</a><a href="#ritual">The ritual</a><a class="button" href="#start">Find your rhythm
+        <span>↗</span></a></nav>
+  </header>
+  <main id="top">
+    <section class="hero">
+      <div class="texture"></div>
+      <div class="wrap hero-grid">
+        <div class="reveal">
+          <div class="eyebrow">A softer way to work</div>
+          <h1>Make space for <em>better</em> work.</h1>
+          <p class="lede">Tidewell turns scattered team rituals into a calmer, clearer rhythm — so your best thinking
+            has room to surface.</p>
+          <div class="hero-actions"><a class="button" href="#start">Find your rhythm <span>↗</span></a><a href="#why"
+              class="button light">How it works</a></div>
+          <p class="note">For teams who care about the way work feels.</p>
+        </div>
+        <div class="visual reveal">
+          <div class="blob-main"></div>
+          <div class="bubble bubble-a">your day,<br>with room<br>to breathe</div>
+          <div class="bubble bubble-b">less rush.<br>more flow.</div>
+          <div class="spark one"></div>
+          <div class="spark two"></div>
+        </div>
+      </div>
+    </section>
+    <section class="intro" id="why">
+      <div class="wrap">
+        <div class="section-grid reveal">
+          <div>
+            <div class="eyebrow">The tidewell approach</div>
+            <h2>Work has a <em>rhythm.</em></h2>
+          </div>
+          <div class="copy">
+            <p><strong>Most productivity tools add noise.</strong> Tidewell helps you notice the current underneath it
+              all — the meetings, focus time, and small rituals that shape your team’s energy.</p>
+            <p>We bring them into one gentle, intelligent flow. Less pushing. More arriving at the work that matters.
+            </p>
+          </div>
+        </div>
+        <div class="pillars">
+          <article class="pillar reveal"><b>01 / Notice</b>
+            <p>See where your team’s attention is going, without turning people into numbers.</p>
+          </article>
+          <article class="pillar reveal"><b>02 / Shape</b>
+            <p>Build rituals that flex with real life and make deep work easier to find.</p>
+          </article>
+          <article class="pillar reveal"><b>03 / Flow</b>
+            <p>Let the good habits compound into a way of working that feels distinctly yours.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section class="ritual" id="ritual">
+      <div class="wrap">
+        <div class="section-grid reveal">
+          <div>
+            <div class="eyebrow">Small shifts, felt daily</div>
+            <h2>A ritual for the <em>in-between.</em></h2>
+          </div>
+          <div class="copy">
+            <p>Every morning, Tidewell gives your team a moment to arrive. A soft pulse of what’s ahead, what needs
+              care, and where there’s space to make something great.</p>
+            <p>By Friday, you’re not just looking back. You can feel what moved.</p>
+          </div>
+        </div>
+        <div class="ritual-card reveal">
+          <div>
+            <h3>Begin with a little more room.</h3>
+            <p>Set up your team’s first gentle rhythm in under five minutes.</p><a class="button" href="#start">Start
+              gently <span>↗</span></a>
+          </div>
+          <div class="line-art"></div>
+        </div>
+      </div>
+    </section>
+    <section class="final" id="start">
+      <div class="wrap reveal">
+        <div class="eyebrow">Your next season of work</div>
+        <h2>Let good work feel <em>good</em> again.</h2>
+        <p>Join the early circle of thoughtful teams building a calmer, more human way forward.</p><a class="button"
+          href="mailto:hello@tidewell.example">Come on in <span>↗</span></a>
+      </div>
+    </section>
+  </main>
+  <footer class="wrap"><span>© 2026 Tidewell</span><span>Made for the way you want to work.</span></footer>
+  <script>const observer = new IntersectionObserver((entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }), { threshold: .12 }); document.querySelectorAll('.reveal').forEach(el => observer.observe(el));</script>
+</body>
+
+</html>
