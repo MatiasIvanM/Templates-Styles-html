@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Civic Edit | Intelligence Worth Reading</title>
+  <meta name="description" content="The Civic Edit turns policy, regulation, and market shifts into a weekly editorial briefing for leaders who need judgment, not noise.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Source+Serif+4:opsz,wght@8..60,400;8..60,520;8..60,650;8..60,760&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #f4efe5;
+      --paper-deep: #e3d8c5;
+      --ink: #161411;
+      --muted: #60594e;
+      --line: rgba(22, 20, 17, 0.22);
+      --blue: #1d3f8f;
+      --red: #c63a22;
+      --gold: #a27a32;
+      --white: #fffaf0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 14% 4%, rgba(198, 58, 34, 0.09), transparent 26rem),
+        linear-gradient(90deg, rgba(22, 20, 17, 0.035) 1px, transparent 1px),
+        var(--paper);
+      background-size: auto, 7.5vw 100%;
+      color: var(--ink);
+      font-family: "Source Serif 4", Georgia, serif;
+      line-height: 1.48;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.13'/%3E%3C/svg%3E");
+      mix-blend-mode: multiply;
+      opacity: 0.22;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .page {
+      width: min(1540px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 22px 0 34px;
+    }
+
+    .masthead {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 18px;
+      padding: 10px 0 16px;
+      border-top: 3px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+      font-family: "Work Sans", Arial, sans-serif;
+      text-transform: uppercase;
+      font-size: clamp(0.64rem, 1.25vw, 0.82rem);
+      font-weight: 700;
+    }
+
+    .masthead__name {
+      font-family: "Libre Caslon Display", Georgia, serif;
+      font-size: clamp(2.7rem, 7.8vw, 8rem);
+      line-height: 0.82;
+      letter-spacing: 0;
+      text-transform: none;
+      text-align: center;
+      font-weight: 400;
+    }
+
+    .masthead__right {
+      justify-self: end;
+      text-align: right;
+    }
+
+    .issue-strip {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr 1fr;
+      border-bottom: 1px solid var(--line);
+      font-family: "Work Sans", Arial, sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .issue-strip span {
+      padding: 10px 14px;
+      border-right: 1px solid var(--line);
+    }
+
+    .issue-strip span:last-child {
+      border-right: 0;
+      text-align: right;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.72fr 0.43fr;
+      grid-template-rows: auto auto auto;
+      gap: 0;
+      min-height: 760px;
+      border-bottom: 3px solid var(--ink);
+    }
+
+    .lead {
+      grid-row: 1 / span 2;
+      padding: clamp(24px, 4.6vw, 72px) clamp(22px, 4vw, 58px) 34px 0;
+      border-right: 1px solid var(--line);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 11ch;
+      font-family: "Libre Caslon Display", Georgia, serif;
+      font-size: clamp(4.1rem, 11vw, 12.4rem);
+      line-height: 0.78;
+      font-weight: 400;
+      letter-spacing: 0;
+    }
+
+    .dek {
+      max-width: 650px;
+      margin: 32px 0 0;
+      font-size: clamp(1.2rem, 2vw, 1.75rem);
+      line-height: 1.3;
+      color: #312c25;
+    }
+
+    .dek::first-letter {
+      float: left;
+      padding: 0.06em 0.1em 0 0;
+      font-family: "Libre Caslon Display", Georgia, serif;
+      font-size: 4.9em;
+      line-height: 0.72;
+      color: var(--red);
+    }
+
+    .feature {
+      grid-column: 2 / span 2;
+      position: relative;
+      min-height: 430px;
+      border-bottom: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    .feature img {
+      width: 100%;
+      height: 100%;
+      min-height: 430px;
+      object-fit: cover;
+      filter: saturate(0.94) contrast(1.04);
+    }
+
+    .feature__caption {
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      width: min(360px, calc(100% - 36px));
+      padding: 14px 16px;
+      background: rgba(244, 239, 229, 0.92);
+      border-top: 3px solid var(--red);
+      font-family: "Work Sans", Arial, sans-serif;
+      font-size: 0.77rem;
+      line-height: 1.45;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .column-note,
+    .pull-card,
+    .proof,
+    .brief {
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .column-note {
+      padding: 24px 24px 26px;
+    }
+
+    .section-title {
+      margin: 0 0 15px;
+      font-family: "Work Sans", Arial, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .column-note p,
+    .brief p,
+    .proof p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.03rem;
+    }
+
+    .pull-card {
+      grid-column: 3;
+      padding: 24px;
+      background: var(--blue);
+      color: var(--white);
+      min-height: 235px;
+    }
+
+    .pull-card blockquote {
+      margin: 0;
+      font-size: clamp(1.45rem, 2.7vw, 2.45rem);
+      line-height: 1.05;
+      font-weight: 650;
+    }
+
+    .pull-card cite {
+      display: block;
+      margin-top: 18px;
+      font-family: "Work Sans", Arial, sans-serif;
+      font-size: 0.74rem;
+      font-style: normal;
+      text-transform: uppercase;
+      color: rgba(255, 250, 240, 0.76);
+    }
+
+    .index-box {
+      grid-column: 1 / span 3;
+      display: grid;
+      grid-template-columns: 1.05fr 0.72fr 0.43fr;
+      border-top: 1px solid var(--ink);
+    }
+
+    .index-item {
+      padding: 20px 22px;
+      border-right: 1px solid var(--line);
+      font-family: "Work Sans", Arial, sans-serif;
+    }
+
+    .index-item:last-child {
+      border-right: 0;
+    }
+
+    .index-item strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+    }
+
+    .index-item span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .spread {
+      display: grid;
+      grid-template-columns: 0.48fr 0.9fr 0.62fr;
+      border-bottom: 3px solid var(--ink);
+    }
+
+    .brief {
+      padding: clamp(24px, 3.4vw, 48px);
+    }
+
+    .brief--dark {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .brief--dark p {
+      color: rgba(244, 239, 229, 0.76);
+    }
+
+    .brief h2 {
+      margin: 0 0 22px;
+      font-family: "Libre Caslon Display", Georgia, serif;
+      font-size: clamp(2.7rem, 5.5vw, 6rem);
+      line-height: 0.88;
+      font-weight: 400;
+    }
+
+    .article {
+      padding: clamp(26px, 4.4vw, 64px);
+      column-count: 2;
+      column-gap: 42px;
+      border-right: 1px solid var(--line);
+    }
+
+    .article p {
+      margin: 0 0 1.05em;
+      font-size: clamp(1.02rem, 1.35vw, 1.18rem);
+    }
+
+    .article strong {
+      font-weight: 760;
+    }
+
+    .folio {
+      display: grid;
+      grid-template-rows: 1fr auto;
+    }
+
+    .proof {
+      padding: 24px;
+      border-right: 0;
+    }
+
+    .proof h3 {
+      margin: 0 0 18px;
+      font-size: clamp(1.5rem, 2.2vw, 2.3rem);
+      line-height: 1;
+      font-weight: 650;
+    }
+
+    .ledger {
+      display: grid;
+      gap: 12px;
+      margin-top: 22px;
+      font-family: "Work Sans", Arial, sans-serif;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .ledger div {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding-top: 10px;
+      border-top: 1px solid currentColor;
+    }
+
+    .accent-plate {
+      padding: clamp(30px, 5vw, 66px);
+      background: var(--red);
+      color: var(--white);
+    }
+
+    .accent-plate p {
+      max-width: 790px;
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 5.2rem);
+      line-height: 0.95;
+      font-weight: 760;
+    }
+
+    .departments {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-bottom: 3px solid var(--ink);
+    }
+
+    .department {
+      min-height: 315px;
+      padding: 24px;
+      border-right: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .department:last-child {
+      border-right: 0;
+      background: var(--paper-deep);
+    }
+
+    .department h3 {
+      margin: 0;
+      font-size: clamp(1.55rem, 2.5vw, 2.6rem);
+      line-height: 0.96;
+      font-weight: 650;
+    }
+
+    .department p {
+      margin: 18px 0 0;
+      color: var(--muted);
+    }
+
+    .mark {
+      width: 58px;
+      height: 58px;
+      border: 1px solid currentColor;
+      display: grid;
+      place-items: center;
+      font-family: "Work Sans", Arial, sans-serif;
+      font-weight: 700;
+      color: var(--red);
+    }
+
+    .close {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      min-height: 520px;
+      border-bottom: 3px solid var(--ink);
+    }
+
+    .close__statement {
+      padding: clamp(30px, 5.5vw, 74px) 0;
+      border-right: 1px solid var(--line);
+    }
+
+    .close__statement h2 {
+      max-width: 12ch;
+      margin: 0;
+      font-family: "Libre Caslon Display", Georgia, serif;
+      font-size: clamp(3.8rem, 8.8vw, 10rem);
+      line-height: 0.82;
+      font-weight: 400;
+    }
+
+    .close__copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: clamp(30px, 5.5vw, 74px);
+    }
+
+    .close__copy p {
+      max-width: 720px;
+      margin: 0 0 26px;
+      font-size: clamp(1.17rem, 1.8vw, 1.55rem);
+      color: #342e26;
+    }
+
+    .editorial-link {
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      min-height: 52px;
+      padding: 0 0 8px;
+      border-bottom: 2px solid var(--ink);
+      font-family: "Work Sans", Arial, sans-serif;
+      font-size: clamp(0.95rem, 1.2vw, 1.08rem);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .footer {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 18px;
+      padding-top: 18px;
+      font-family: "Work Sans", Arial, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    @media (max-width: 980px) {
+      body {
+        background-size: 14vw 100%;
+      }
+
+      .masthead,
+      .issue-strip,
+      .hero-grid,
+      .index-box,
+      .spread,
+      .departments,
+      .close,
+      .footer {
+        grid-template-columns: 1fr;
+      }
+
+      .masthead {
+        gap: 8px;
+      }
+
+      .masthead__right,
+      .issue-strip span:last-child {
+        justify-self: auto;
+        text-align: left;
+      }
+
+      .issue-strip span,
+      .lead,
+      .feature,
+      .index-box,
+      .column-note,
+      .pull-card,
+      .brief,
+      .article,
+      .department,
+      .close__statement {
+        grid-column: auto;
+        grid-row: auto;
+        border-right: 0;
+      }
+
+      .lead {
+        padding-right: 0;
+      }
+
+      .hero-grid {
+        min-height: 0;
+      }
+
+      .index-item,
+      .issue-strip span,
+      .department {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .article {
+        column-count: 1;
+      }
+
+      .close__statement {
+        padding-bottom: 18px;
+      }
+
+      .close__copy {
+        padding: 26px 0 46px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .page {
+        width: min(100% - 24px, 1540px);
+      }
+
+      .masthead__name {
+        font-size: clamp(2.35rem, 18vw, 4.2rem);
+      }
+
+      h1,
+      .close__statement h2 {
+        font-size: clamp(3.45rem, 19vw, 5.4rem);
+      }
+
+      .feature,
+      .feature img {
+        min-height: 330px;
+      }
+
+      .accent-plate {
+        padding-left: 22px;
+        padding-right: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!--
+  THESIS: The Civic Edit sells judgment through a single-page feature spread, refusing the dashboard-SaaS hero with metrics and icon cards.
+  OWN-WORLD: Inked paper, visible columns, serif authority, rule lines, one cobalt/vermilion image, and blocks that feel placed by an editor.
+  STORY: Visitors move from intrigue about noisy civic change, to trust in the editorial method, to conviction that a weekly briefing can guide decisions.
+  FIRST VIEWPORT: Masthead over a three-column magazine grid: huge headline left, feature image right, supporting notes and a cobalt pull quote below.
+  FORM: Editorial magazine grid, chosen directly from the pinned user brief; seed key: brief-pinned-editorial-magazine-grid.
+  FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+  -->
+  <main class="page">
+    <header class="masthead" aria-label="Publication masthead">
+      <div>Weekly intelligence for public consequence</div>
+      <a class="masthead__name" href="#">The Civic Edit</a>
+      <div class="masthead__right">Issue 06 / Regulatory weather</div>
+    </header>
+
+    <div class="issue-strip" aria-label="Issue details">
+      <span>For founders, counsel, policy teams, and boards</span>
+      <span>Published before Monday committee rooms open</span>
+      <span>Briefing desk: London / New York / Brussels</span>
+    </div>
+
+    <section class="hero-grid" aria-labelledby="hero-title">
+      <article class="lead">
+        <h1 id="hero-title">Read the week before it becomes urgent.</h1>
+        <p class="dek">The Civic Edit is a private editorial briefing that turns regulation, litigation, procurement, standards, and market pressure into a readable field guide for decision makers.</p>
+      </article>
+
+      <figure class="feature">
+        <img src="assets/civic-edit-feature.png" alt="Editorial desk with layered policy papers, city map, annotated briefing materials, and a tablet with abstract data.">
+        <figcaption class="feature__caption">Synthetic editorial image: the service replaces dashboards with a prepared reading room of interpreted signals.</figcaption>
+      </figure>
+
+      <aside class="column-note">
+        <h2 class="section-title">The Service</h2>
+        <p>Each Friday, editors and analysts compress the civic forces most likely to touch your category into a concise, argued edition.</p>
+      </aside>
+
+      <aside class="pull-card">
+        <blockquote>Noise is abundant. Editorial judgment is the scarce instrument.</blockquote>
+        <cite>Founding note</cite>
+      </aside>
+
+      <div class="index-box" aria-label="Issue index">
+        <div class="index-item">
+          <strong>Lead Analysis</strong>
+          <span>What changed, who moved, and which assumption no longer holds.</span>
+        </div>
+        <div class="index-item">
+          <strong>Board Margin</strong>
+          <span>Three questions to ask before capital, hiring, or public posture shifts.</span>
+        </div>
+        <div class="index-item">
+          <strong>Signal Ledger</strong>
+          <span>Annotated source notes, ranked by consequence rather than novelty.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="spread" aria-labelledby="method-title">
+      <aside class="brief brief--dark">
+        <h2 id="method-title">A newsroom for the consequential.</h2>
+        <p>Not alerts. Not an analyst portal. A weekly edit with a point of view, written for people who have to decide in public.</p>
+      </aside>
+
+      <article class="article">
+        <p><strong>The Civic Edit begins where monitoring tools end.</strong> Our editors follow legislative calendars, standards bodies, agency signals, court filings, procurement language, public-company disclosures, and stakeholder campaigns.</p>
+        <p>Then we do the slower work: placing each signal in context, arguing why it matters, and separating events that merely sound important from forces that can change budget, timing, liability, or license to operate.</p>
+        <p>Every edition is built like a magazine feature. There is a lead argument, sidebars for nuance, source margins for auditability, and a closing note that turns reading into a decision ritual.</p>
+        <p>Subscribers receive one vertical edition and one cross-sector dispatch each week. Custom desks can add watchlists for geographies, bills, agencies, competitors, or standards committees.</p>
+      </article>
+
+      <div class="folio">
+        <aside class="proof">
+          <h3>What arrives in the edition</h3>
+          <p>An argued lead, risk notes, source margins, stakeholder map, coming deadlines, and the two moves worth preparing before the next news cycle.</p>
+          <div class="ledger">
+            <div><span>Typical length</span><span>18 min</span></div>
+            <div><span>Source margin</span><span>Linked</span></div>
+            <div><span>Cadence</span><span>Friday</span></div>
+          </div>
+        </aside>
+        <aside class="proof">
+          <h3>Who it serves</h3>
+          <p>Leadership teams that cannot afford to treat public policy as an after-hours research task.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="accent-plate" aria-label="Editorial proposition">
+      <p>We turn civic complexity into a reading habit your leadership team can actually sustain.</p>
+    </section>
+
+    <section class="departments" aria-label="Editorial departments">
+      <article class="department">
+        <div class="mark">A</div>
+        <div>
+          <h3>Argument first</h3>
+          <p>Every edition leads with the interpretation, then shows the evidence in the margin.</p>
+        </div>
+      </article>
+      <article class="department">
+        <div class="mark">B</div>
+        <div>
+          <h3>Curated source trail</h3>
+          <p>Primary filings, calendars, standards drafts, and public records stay close enough to check.</p>
+        </div>
+      </article>
+      <article class="department">
+        <div class="mark">C</div>
+        <div>
+          <h3>Board-ready language</h3>
+          <p>Written in plain, exact prose for decisions that move across legal, finance, and communications.</p>
+        </div>
+      </article>
+      <article class="department">
+        <div class="mark">D</div>
+        <div>
+          <h3>Private desk option</h3>
+          <p>A dedicated editor maintains watchlists and prepares confidential issue notes for your team.</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="close" aria-labelledby="close-title">
+      <div class="close__statement">
+        <h2 id="close-title">Commission your first issue.</h2>
+      </div>
+      <div class="close__copy">
+        <p>Send us the market, geography, or regulatory question your team keeps revisiting. We will return a sample edition outline, the source universe we would monitor, and the editorial judgment we believe the desk can add.</p>
+        <a class="editorial-link" href="mailto:briefing@thecivicedit.example">Request the sample edition</a>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>The Civic Edit is a conceived landing-page concept.</span>
+      <span>All data and service details are illustrative.</span>
+      <span>Editorial system: magazine grid / restrained color.</span>
+    </footer>
+  </main>
+</body>
+</html>
