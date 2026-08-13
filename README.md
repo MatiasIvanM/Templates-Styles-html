@@ -1,69 +1,43 @@
-# LP Templates
+# Matías / Template Index
 
-Colección de plantillas de landing pages listas para explorar, adaptar y reutilizar en nuevos proyectos web.
+Este repositorio es el portfolio personal de Matías: un archivo de exploraciones visuales, composiciones y sistemas de landing pages.
 
-## Plantillas incluidas
+Cada carpeta representa una dirección creativa distinta. Las templates se pueden explorar como piezas de portfolio, pero también están preparadas para reutilizarse, adaptarse y convertirse en la base de proyectos personales o comerciales.
 
-- **Art Deco** — estética elegante, geométrica y sofisticada.
-- **Dark Mode First Diagonal Broken Grid** — diseño oscuro con composición editorial y grilla experimental.
-- **Japandi** — minimalismo cálido, equilibrado y funcional.
-- **Neumorphic** — interfaz suave basada en el estilo neumórfico.
-- **Organic Fluid** — formas orgánicas, fluidas y expresivas.
-- **Retro-futuristic** — inspiración retro con una visión futurista.
-- **Swiss International Bento Grid** — estructura limpia, tipografía y composición inspiradas en el diseño suizo.
+## Inicio
 
-## Cómo usar las plantillas
+Abre el [index.html](index.html) de la raíz para visitar el portfolio y catálogo completo.
 
-No se necesitan dependencias ni un proceso de compilación. Para ver una plantilla, abre su archivo `index.html` directamente en el navegador.
+El catálogo presenta cada template con una preview, su estilo visual, su layout y un enlace directo a la implementación.
 
-Si prefieres utilizar un servidor local, elige cualquiera de estas opciones desde la raíz del proyecto:
+## Cómo usar una template
 
-### Python
+No se necesitan dependencias ni un proceso de compilación. Puedes abrir directamente el `index.html` de cualquier carpeta en el navegador.
+
+Para trabajar con rutas locales, previews o iframes, se recomienda iniciar un servidor desde la raíz del proyecto:
 
 ```bash
 python -m http.server 8000
 ```
 
-### Node.js
+Después visita [http://localhost:8000](http://localhost:8000) y abre el catálogo principal.
 
-Con `npx`, sin instalar nada permanentemente:
+También puedes utilizar `npx serve . -l 8000`, PHP, Ruby o la extensión Live Server de Visual Studio Code.
 
-```bash
-npx serve . -l 8000
-```
-
-También puedes usar `http-server` si ya lo tienes instalado:
-
-```bash
-npx http-server . -p 8000
-```
-
-### PHP
-
-```bash
-php -S localhost:8000
-```
-
-### Ruby
-
-```bash
-ruby -run -e httpd . -p 8000
-```
-
-### Visual Studio Code
-
-Instala la extensión **Live Server**, haz clic derecho sobre cualquier `index.html` y selecciona **Open with Live Server**.
-
-Después visita [http://localhost:8000](http://localhost:8000) y abre la carpeta de la plantilla que quieras revisar.
-
-## Estructura del proyecto
+## Estructura
 
 ```text
 .
+├── index.html
+├── Tech-foward-Bento-grid/
+│   ├── index.html
 ├── Art Deco/
 │   └── index.html
 ├── Dark-Mode-First-Diagonal-Broken-Grid/
 │   └── index.html
+├── Editorial-Magazine-grid/
+│   ├── index.html
+│   └── assets/
 ├── Japandi/
 │   └── index.html
 ├── Neumorphic/
@@ -76,27 +50,28 @@ Después visita [http://localhost:8000](http://localhost:8000) y abre la carpeta
     └── index.html
 ```
 
-## Personalización
+## Personalización y uso
 
-Cada plantilla es independiente. Puedes editar su `index.html` para cambiar el contenido, los colores, la tipografía y los estilos según las necesidades de tu proyecto.
+Cada template es independiente. Puedes modificar su `index.html`, contenido, colores, tipografía, imágenes y estilos para adaptarla a tu proyecto.
+
+Se permite:
+
+- Usar y modificar las templates para proyectos personales o comerciales.
+- Integrar el código en un sitio web o producto final propio o de un cliente.
+- Utilizarlas como punto de partida para una dirección visual nueva.
+
+No se permite, sin autorización previa:
+
+- Revender, sublicenciar o redistribuir las templates como templates, temas o kits.
+- Publicar una copia del código fuente en otro repositorio, marketplace o paquete.
+- Presentar estas templates o versiones sustancialmente modificadas como una obra propia.
+
+El uso de las templates en un proyecto final está permitido, pero el código fuente no puede distribuirse como un producto independiente.
 
 ## Licencia
 
 ### Licencia propietaria — Todos los derechos reservados
 
-Copyright © 2026. Todos los derechos reservados.
+Copyright © 2026 Matías. Todos los derechos reservados.
 
-Se permite:
-
-- Usar y modificar estas plantillas para proyectos personales o comerciales.
-- Integrar el código en un sitio web o producto final propio o de un cliente.
-
-No se permite, sin autorización previa:
-
-- Revender, sublicenciar o redistribuir estas plantillas como plantillas, temas o kits.
-- Publicar una copia del código fuente en otro repositorio, marketplace o paquete.
-- Presentar estas plantillas o versiones sustancialmente modificadas como una obra propia.
-
-El uso de las plantillas en un proyecto final está permitido, pero el código fuente de la plantilla no puede distribuirse como un producto independiente. Para usos que no estén contemplados aquí, solicita autorización al autor.
-
-Esta licencia busca proteger el trabajo original sin impedir su utilización en proyectos reales. La protección legal efectiva puede variar según el país; considera consultar a un profesional si vas a distribuirlas comercialmente.
+Para usos que no estén contemplados aquí, solicita autorización al autor. La protección legal efectiva puede variar según el país; considera consultar a un profesional si vas a distribuir el código comercialmente.
